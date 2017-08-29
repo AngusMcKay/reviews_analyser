@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-UK">
+
+<head>
+    <meta charset="utf-8">
+    <title>Reviews Analyser</title>
+    <script type="text/javascript" src="d3/d3.js"></script>
+</head>
+
+<body>
+    <section>
+        <div>
+            <script type="text/javascript">
+            var text1 = d3.csv("data/5star_topic1.csv", function(error, data) {
+                if (error) { //If error is not null, something went wrong.
+                    console.log(error); //Log the error.
+                } else { //If no error, the file loaded correctly. Yay!
+                    console.log(data); //Log the data.
+                    var data_vocab_5star = data;
+                    d3.select("body").select("p")
+                        .data(data_vocab_5star)
+                        .enter()
+                        .append("p")
+                        .style("font-size", function(d) { return d.font_size * 50 + "px" })
+                        .style("opacity", function(d) { return d.opacity * 10 })
+                        .text(function(d) { return d.word + " " });
+                }
+
+            });
+            </script>
+        </div>
+    </section>
+    <script type="text/javascript">
+    d3.csv("data/5star_topic2.csv", function(error, data) {
+        if (error) { //If error is not null, something went wrong.
+            console.log(error); //Log the error.
+        } else { //If no error, the file loaded correctly. Yay!
+            console.log(data); //Log the data.
+            var data_vocab_5star = data;
+            d3.select("body").select("p")
+                .data(data_vocab_5star)
+                .enter()
+                .append("text")
+                .style("font-size", function(d) { return d.font_size * 50 + "px" })
+                .style("opacity", function(d) { return d.opacity * 10 })
+                .text(function(d) { return d.word + " " });
+        }
+
+    });
+    </script>
+    <script type="text/javascript">
+    document.getElementById("data/5star_topic1.csv").onchange = function() {
+
+        var file = this.files[0];
+
+        var reader = new FileReader();
+        reader.onload = function(progressEvent) {
+            // Entire file
+            console.log(this.result);
+
+            // By lines
+            var lines = this.result.split('\n');
+            for (var line = 0; line < lines.length; line++) {
+                console.log(lines[line]);
+            }
+        };
+        reader.readAsText(file);
+    };
+    </script>
+</body>
+
+</html>
