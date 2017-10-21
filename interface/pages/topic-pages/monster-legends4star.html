@@ -101,12 +101,19 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>Topics: Monster Legends 5*<small id="Date"></small>
+                <h1>Topics: Monster Legends 4<i class="fa fa-star-o"></i><small id="Date"></small>
                 <script>
                 var d = new Date();
                 document.getElementById("Date").innerHTML = d.toDateString();
                 </script>
                 </h1>
+                <ol class="breadcrumb">
+                    <li><a href="monster-legends5star.html">5<i class="fa fa-star"></i> </a></li>
+                    <li><a href="#!">4<i class="fa fa-star-o"></i> </a></li>
+                    <li><a href="monster-legends3star.html">3<i class="fa fa-star"></i> </a></li>
+                    <li><a href="monster-legends2star.html">2<i class="fa fa-star"></i> </a></li>
+                    <li><a href="monster-legends1star.html">1<i class="fa fa-star"></i> </a></li>
+                </ol>
             </section>
             <!-- Main content -->
             <section class="content">
@@ -120,7 +127,7 @@
                             <div class="nav nav-tabs small-box bg-teal" style="max-height: 250px; overflow-y:scroll;">
                                 <div class="inner" id="topic1-box" style="max-height: 100%">
                                     <script type="text/javascript">
-                                    d3.csv("../../data/5star_topic1.csv", function(error, data) {
+                                    d3.csv("../../data/4star_topic1.csv", function(error, data) {
                                         if (error) { //If error is not null, something went wrong.
                                             console.log(error); //Log the error.
                                         } else { //If no error, the file loaded correctly. Yay!
@@ -131,7 +138,9 @@
                                                 .style("font-size", function(d) { return d.font_size * 50 + "px" })
                                                 .style("opacity", function(d) { return d.opacity * 10 })
                                                 .text(function(d) { return d.word + " " })
-                                                .on('mouseover', function(d,i) {});
+                                                .on('mouseover', function(d) {
+                                                    d3.select(this).select('text').style("font-size", 10)
+                                                });
                                         }
 
                                     });
@@ -148,7 +157,7 @@
                             <div class="nav nav-tabs small-box bg-maroon" style="max-height: 250px; overflow-y:scroll;">
                                 <div class="inner" id="topic2-box" style="max-height: 100%">
                                     <script type="text/javascript">
-                                    d3.csv("../../data/5star_topic2.csv", function(error, data) {
+                                    d3.csv("../../data/4star_topic2.csv", function(error, data) {
                                         if (error) { //If error is not null, something went wrong.
                                             console.log(error); //Log the error.
                                         } else { //If no error, the file loaded correctly. Yay!
@@ -175,7 +184,7 @@
                             <div class="nav nav-tabs small-box bg-yellow" style="max-height: 250px; overflow-y:scroll;">
                                 <div class="inner" id="topic3-box" style="max-height: 100%">
                                     <script type="text/javascript">
-                                    d3.csv("../../data/5star_topic3.csv", function(error, data) {
+                                    d3.csv("../../data/4star_topic3.csv", function(error, data) {
                                         if (error) { //If error is not null, something went wrong.
                                             console.log(error); //Log the error.
                                         } else { //If no error, the file loaded correctly. Yay!
@@ -206,7 +215,7 @@
                             <div class="nav nav-tabs small-box bg-red" style="max-height: 250px; overflow-y:scroll;">
                                 <div class="inner" id="topic4-box" style="max-height: 100%">
                                     <script type="text/javascript">
-                                    d3.csv("../../data/5star_topic4.csv", function(error, data) {
+                                    d3.csv("../../data/4star_topic4.csv", function(error, data) {
                                         if (error) { //If error is not null, something went wrong.
                                             console.log(error); //Log the error.
                                         } else { //If no error, the file loaded correctly. Yay!
@@ -233,7 +242,7 @@
                             <div class="nav nav-tabs small-box bg-purple" style="max-height: 250px; overflow-y:scroll;">
                                 <div class="inner" id="topic5-box" style="max-height: 100%">
                                     <script type="text/javascript">
-                                    d3.csv("../../data/5star_topic5.csv", function(error, data) {
+                                    d3.csv("../../data/4star_topic5.csv", function(error, data) {
                                         if (error) { //If error is not null, something went wrong.
                                             console.log(error); //Log the error.
                                         } else { //If no error, the file loaded correctly. Yay!

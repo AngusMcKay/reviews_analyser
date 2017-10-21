@@ -196,19 +196,16 @@ topic_words_5star = doc_top_5star[1]
 ordered_vocab_5star = np.asarray(vocab_trunc)[np.argsort(-topic_words_5star)]
 word_probs_5star = np.sort(topic_words_5star)[:,::-1]
 
-# save these arrays as csvs (and adding header row to make things easier in d3)
-np.savetxt("output/ordered_vocab_and_word_probs_5star.csv",
-           np.row_stack((list(range(ordered_vocab_5star.shape[1])), ordered_vocab_5star, word_probs_5star)),
-           delimiter=",", fmt='%s')
-np.savetxt("output/word_probs_5star.csv",
-           np.row_stack((list(range(word_probs_5star.shape[1])), word_probs_5star)),
-           delimiter=",")
 # save each individual topic separately and rescale probs to start at 1
 for r in range(ordered_vocab_5star.shape[0]):
+    
     # rescaling probabilities so that highest is 1 in order to make font sizing work
     font_size = word_probs_5star[r,:200]/word_probs_5star[r,0]
+    
     # creating 'opacity' so that words are virtually invisible by around word 200
     opacity = 1 - (1 - 0.1)*(word_probs_5star[r,0]-word_probs_5star[r,:200])/(word_probs_5star[r,0]-word_probs_5star[r,200])
+    
+    # save file
     np.savetxt("interface/data/5star_topic" + str(r+1) + ".csv",
                np.row_stack((['word','probability','font_size','opacity'], np.column_stack((ordered_vocab_5star[r,:200], word_probs_5star[r,:200], font_size, opacity)))),
                delimiter=",", fmt='%s')
@@ -248,6 +245,21 @@ doc_topics_4star = doc_top_4star[0]
 topic_words_4star = doc_top_4star[1]
 
 ordered_vocab_4star = np.asarray(vocab_trunc)[np.argsort(-topic_words_4star)]
+word_probs_4star = np.sort(topic_words_4star)[:,::-1]
+
+# save each individual topic separately and rescale probs to start at 1
+for r in range(ordered_vocab_4star.shape[0]):
+    
+    # rescaling probabilities so that highest is 1 in order to make font sizing work
+    font_size = word_probs_4star[r,:200]/word_probs_4star[r,0]
+    
+    # creating 'opacity' so that words are virtually invisible by around word 200
+    opacity = 1 - (1 - 0.1)*(word_probs_4star[r,0]-word_probs_4star[r,:200])/(word_probs_4star[r,0]-word_probs_4star[r,200])
+    
+    # save file
+    np.savetxt("interface/data/4star_topic" + str(r+1) + ".csv",
+               np.row_stack((['word','probability','font_size','opacity'], np.column_stack((ordered_vocab_4star[r,:200], word_probs_4star[r,:200], font_size, opacity)))),
+               delimiter=",", fmt='%s')
 
 
 
@@ -257,11 +269,11 @@ reviews_3star = review_data['reviewText'][review_data['overall']==3]
 reviews_3star = reviews_3star[np.asarray([len(doc) for doc in reviews_3star])!=0]
 
 # create dtm matrix
-dtm_3star = dtm_generator(reviews_3star[:5000], stopwords=stops)
+dtm_3star = dtm_generator(reviews_3star[:2000], stopwords=stops)
 vocab = list(dtm_3star)
 
 # use tfidf weighting to remove non-meaningful but common words (e.g. 'game', 'play' etc)
-tfidf_3star = tfidf_corpus_level(reviews_3star[:5000], stopwords=stops)
+tfidf_3star = tfidf_corpus_level(reviews_3star[:2000], stopwords=stops)
 tfidf_cutoff_3star = np.median(tfidf_3star)
 
 dtm_trunc_3star = np.asarray(dtm_3star)[:,np.asarray(tfidf_3star>tfidf_cutoff_3star)]
@@ -283,6 +295,22 @@ doc_topics_3star = doc_top_3star[0]
 topic_words_3star = doc_top_3star[1]
 
 ordered_vocab_3star = np.asarray(vocab_trunc)[np.argsort(-topic_words_3star)]
+word_probs_3star = np.sort(topic_words_3star)[:,::-1]
+
+# save each individual topic separately and rescale probs to start at 1
+for r in range(ordered_vocab_3star.shape[0]):
+    
+    # rescaling probabilities so that highest is 1 in order to make font sizing work
+    font_size = word_probs_3star[r,:200]/word_probs_3star[r,0]
+    
+    # creating 'opacity' so that words are virtually invisible by around word 200
+    opacity = 1 - (1 - 0.1)*(word_probs_3star[r,0]-word_probs_3star[r,:200])/(word_probs_3star[r,0]-word_probs_3star[r,200])
+    
+    # save file
+    np.savetxt("interface/data/3star_topic" + str(r+1) + ".csv",
+               np.row_stack((['word','probability','font_size','opacity'], np.column_stack((ordered_vocab_3star[r,:200], word_probs_3star[r,:200], font_size, opacity)))),
+               delimiter=",", fmt='%s')
+
 
 
 
@@ -318,6 +346,22 @@ doc_topics_2star = doc_top_2star[0]
 topic_words_2star = doc_top_2star[1]
 
 ordered_vocab_2star = np.asarray(vocab_trunc)[np.argsort(-topic_words_2star)]
+word_probs_2star = np.sort(topic_words_2star)[:,::-1]
+
+# save each individual topic separately and rescale probs to start at 1
+for r in range(ordered_vocab_2star.shape[0]):
+    
+    # rescaling probabilities so that highest is 1 in order to make font sizing work
+    font_size = word_probs_2star[r,:200]/word_probs_2star[r,0]
+    
+    # creating 'opacity' so that words are virtually invisible by around word 200
+    opacity = 1 - (1 - 0.1)*(word_probs_2star[r,0]-word_probs_2star[r,:200])/(word_probs_2star[r,0]-word_probs_2star[r,200])
+    
+    # save file
+    np.savetxt("interface/data/2star_topic" + str(r+1) + ".csv",
+               np.row_stack((['word','probability','font_size','opacity'], np.column_stack((ordered_vocab_2star[r,:200], word_probs_2star[r,:200], font_size, opacity)))),
+               delimiter=",", fmt='%s')
+
 
 
 
@@ -354,6 +398,21 @@ doc_topics_1star = doc_top_1star[0]
 topic_words_1star = doc_top_1star[1]
 
 ordered_vocab_1star = np.asarray(vocab_trunc)[np.argsort(-topic_words_1star)]
+word_probs_1star = np.sort(topic_words_1star)[:,::-1]
+
+# save each individual topic separately and rescale probs to start at 1
+for r in range(ordered_vocab_1star.shape[0]):
+    
+    # rescaling probabilities so that highest is 1 in order to make font sizing work
+    font_size = word_probs_1star[r,:200]/word_probs_1star[r,0]
+    
+    # creating 'opacity' so that words are virtually invisible by around word 200
+    opacity = 1 - (1 - 0.1)*(word_probs_1star[r,0]-word_probs_1star[r,:200])/(word_probs_1star[r,0]-word_probs_1star[r,200])
+    
+    # save file
+    np.savetxt("interface/data/1star_topic" + str(r+1) + ".csv",
+               np.row_stack((['word','probability','font_size','opacity'], np.column_stack((ordered_vocab_1star[r,:200], word_probs_1star[r,:200], font_size, opacity)))),
+               delimiter=",", fmt='%s')
 
 
 
